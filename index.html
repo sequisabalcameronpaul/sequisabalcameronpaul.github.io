@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Registration Form by paul</title>
+   
+    <script src="https://cdn.tailwindcss.com"></script>
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+     
+        .required-asterisk::after {
+            content: '*';
+            color: #ef4444; 
+            margin-left: 0.25rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+    <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-8 space-y-8">
+      
+        <div class="text-center">
+            <h1 class="text-3xl font-bold text-gray-800">School Registration by Paul</h1>
+            <p class="mt-2 text-gray-600">Please fill out the form below to enroll.</p>
+        </div>
+        
+       
+        <form action="#" method="POST" class="space-y-6">
+           
+            <fieldset class="p-6 border border-gray-200 rounded-lg">
+                <legend class="text-xl font-semibold text-gray-700 px-2">Personal Information</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                   
+                    <div>
+                        <label for="full-name" class="block text-sm font-medium text-gray-700 required-asterisk">Full Name</label>
+                        <input type="text" name="full-name" id="full-name" placeholder="Juan Dela Cruz" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" required>
+                    </div>
+
+                   
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 required-asterisk">Email Address</label>
+                        <input type="email" name="email" id="email" placeholder="you@example.com" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" required>
+                    </div>
+
+                   
+                    <div>
+                        <label for="phone-number" class="block text-sm font-medium text-gray-700 required-asterisk">Phone Number</label>
+                        <input type="tel" name="phone-number" id="phone-number" placeholder="0912-345-6789" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" required>
+                    </div>
+
+                 
+                    <div>
+                        <label for="dob" class="block text-sm font-medium text-gray-700 required-asterisk">Date of Birth</label>
+                        <input type="date" name="dob" id="dob" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 text-gray-500" required>
+                    </div>
+
+                  
+                    <div class="md:col-span-2">
+                        <label for="address" class="block text-sm font-medium text-gray-700 required-asterisk">Address</label>
+                        <input type="text" name="address" id="address" placeholder="block 2, LABM, Lapu-Lapu City" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" required>
+                    </div>
+                </div>
+            </fieldset>
+
+            
+            <fieldset class="p-6 border border-gray-200 rounded-lg">
+                <legend class="text-xl font-semibold text-gray-700 px-2">Course Information</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+
+                    <div>
+                        <label for="course" class="block text-sm font-medium text-gray-700 required-asterisk">Select a Course</label>
+                        <select id="course" name="course" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" required>
+                            <option value="" disabled selected>Please select an option</option>
+                            <option value="comptech">Computer Technology</option>
+                            <option value="electronic">Electronics</option>
+                            <option value="tourism">Tourism</option>
+                            <option value="Education">Education</option>
+                        </select>
+                    </div>
+
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 required-asterisk">Gender</label>
+                        <div class="mt-2 flex items-center space-x-6">
+                            <label for="male" class="flex items-center">
+                                <input id="male" name="gender" type="radio" value="male" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" required>
+                                <span class="ml-2 text-sm text-gray-700">Male</span>
+                            </label>
+                            <label for="female" class="flex items-center">
+                                <input id="female" name="gender" type="radio" value="female" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                                <span class="ml-2 text-sm text-gray-700">Female</span>
+                            </label>
+                            <label for="other" class="flex items-center">
+                                <input id="other" name="gender" type="radio" value="other" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                                <span class="ml-2 text-sm text-gray-700">Other</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            
+            
+            <div>
+             
+            <div>
+                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:scale-105">
+                    Register Now
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
