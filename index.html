@@ -1,120 +1,2353 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Registration Form by paul</title>
-   
-    <script src="https://cdn.tailwindcss.com"></script>
-   
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NovaTrade — Trading Terminal</title>
+  <style>
+    :root {
+      --bg: #05060a;
+      --p: #0c0f15;
+      --p2: #11151d;
+      --line: #202632;
+      --txt: #f5f7fb;
+      --mut: #7f8797;
+      --g: #20e6a0;
+      --r: #ff5270;
+      --b: #7280ff
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--txt);
+      font: 14px Inter, system-ui, Segoe UI, Arial;
+      overflow-x: hidden
+    }
+
+    button,
+    input {
+      font: inherit
+    }
+
+    button {
+      cursor: pointer
+    }
+
+    .hidden {
+      display: none !important
+    }
+
+    .up {
+      color: var(--g)
+    }
+
+    .down {
+      color: var(--r)
+    }
+
+    body:before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+      background-size: 55px 55px;
+      mask-image: linear-gradient(#000, transparent 85%);
+      z-index: -3
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .16;
+      z-index: -2;
+      animation: f 12s ease-in-out infinite
+    }
+
+    .o1 {
+      width: 430px;
+      height: 430px;
+      background: #6570ff;
+      top: -180px;
+      left: -120px
+    }
+
+    .o2 {
+      width: 350px;
+      height: 350px;
+      background: #00e5a0;
+      right: -120px;
+      top: 260px;
+      animation-delay: -4s
+    }
+
+    .o3 {
+      width: 300px;
+      height: 300px;
+      background: #a55cff;
+      left: 35%;
+      bottom: -180px;
+      animation-delay: -8s
+    }
+
+    @keyframes f {
+      50% {
+        transform: translate(40px, 30px) scale(1.08)
+      }
+    }
+
+    .landing {
+      min-height: 100vh
+    }
+
+    .nav {
+      height: 74px;
+      padding: 0 6vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #151922;
+      background: #05060acc;
+      backdrop-filter: blur(18px);
+      position: relative;
+      z-index: 5
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 20px
+    }
+
+    .logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #fff, #7480ff, #20e6a0);
+      box-shadow: 0 0 35px #6875ff55
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 28px;
+      color: #969eae;
+      font-size: 13px
+    }
+
+    .navlinks a:hover {
+      color: #fff
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: #11151d;
+      color: #fff;
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-weight: 750;
+      transition: .2s
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: #394254
+    }
+
+    .primary {
+      background: #fff;
+      color: #05060a;
+      border-color: #fff
+    }
+
+    .greenbtn {
+      background: var(--g);
+      color: #03120c;
+      border-color: var(--g)
+    }
+
+    .hero {
+      text-align: center;
+      max-width: 1200px;
+      margin: auto;
+      padding: 100px 20px 65px
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #252c39;
+      border-radius: 99px;
+      padding: 8px 12px;
+      color: #aab1bf;
+      background: #0b0e14aa;
+      font-size: 11px
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--g);
+      box-shadow: 0 0 13px var(--g);
+      animation: p 1.3s infinite
+    }
+
+    @keyframes p {
+      50% {
+        opacity: .3;
+        transform: scale(.7)
+      }
+    }
+
+    h1 {
+      font-size: clamp(50px, 8vw, 105px);
+      line-height: .9;
+      letter-spacing: -6px;
+      margin: 25px 0;
+      font-weight: 950
+    }
+
+    .grad {
+      color: transparent;
+      background: linear-gradient(100deg, #fff, #aab3ff, #59ffc7, #fff);
+      background-size: 250%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: s 5s linear infinite
+    }
+
+    @keyframes s {
+      to {
+        background-position: 250%
+      }
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: auto;
+      color: #8d95a5;
+      line-height: 1.7;
+      font-size: 16px
+    }
+
+    .actions {
+      margin: 30px 0;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .trust {
+      font-size: 10px;
+      color: #646c7b;
+      letter-spacing: 1.6px;
+      text-transform: uppercase
+    }
+
+    .terminal {
+      margin: 55px auto 0;
+      max-width: 1080px;
+      border: 1px solid #282f3c;
+      background: #0b0e14dd;
+      border-radius: 20px;
+      padding: 10px;
+      box-shadow: 0 35px 100px #000b, 0 0 80px #6674ff12;
+      animation: float 5s ease-in-out infinite
+    }
+
+    @keyframes float {
+      50% {
+        transform: translateY(-7px)
+      }
+    }
+
+    .dots {
+      height: 30px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      padding: 0 8px;
+      color: #687182;
+      font-size: 10px
+    }
+
+    .wd {
+      width: 8px;
+      height: 8px;
+      background: #333a47;
+      border-radius: 50%
+    }
+
+    .screen {
+      height: 350px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #07090d;
+      display: grid;
+      grid-template-columns: 1.5fr .55fr
+    }
+
+    .chartmock {
+      position: relative;
+      padding: 18px;
+      background: linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+      background-size: 45px 45px
+    }
+
+    .chartmock svg {
+      position: absolute;
+      inset: 55px 20px 15px;
+      width: calc(100% - 40px);
+      height: calc(100% - 70px)
+    }
+
+    .sidefake {
+      padding: 20px;
+      border-left: 1px solid #171c25;
+      background: #0b0e13
+    }
+
+    .price {
+      font-size: 29px;
+      font-weight: 900;
+      margin: 7px 0
+    }
+
+    .fake {
+      margin-top: 25px;
+      display: grid;
+      gap: 9px
+    }
+
+    .fake div {
+      padding: 12px;
+      border: 1px solid #1c222d;
+      border-radius: 9px;
+      display: flex;
+      justify-content: space-between;
+      background: #0d1117;
+      font-size: 11px
+    }
+
+    .ticker {
+      overflow: hidden;
+      border-top: 1px solid #151922;
+      border-bottom: 1px solid #151922;
+      white-space: nowrap
+    }
+
+    .tickerin {
+      display: inline-flex;
+      min-width: max-content;
+      animation: t 28s linear infinite
+    }
+
+    @keyframes t {
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    .tick {
+      padding: 14px 24px;
+      border-right: 1px solid #151922;
+      font-size: 12px
+    }
+
+    .features {
+      max-width: 1200px;
+      margin: auto;
+      padding: 95px 20px
+    }
+
+    .ftitle {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 40px
+    }
+
+    .eyebrow {
+      color: var(--g);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase
+    }
+
+    .ftitle h2 {
+      font-size: 44px;
+      letter-spacing: -2px;
+      margin: 10px 0
+    }
+
+    .ftitle p {
+      color: var(--mut);
+      line-height: 1.6
+    }
+
+    .fgrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px
+    }
+
+    .feature {
+      padding: 24px;
+      border: 1px solid #1a202a;
+      background: linear-gradient(145deg, #0d1016, #080a0e);
+      border-radius: 16px;
+      transition: .3s
+    }
+
+    .feature:hover {
+      transform: translateY(-6px);
+      border-color: #343d4e
+    }
+
+    .ico {
+      font-size: 24px;
+      margin-bottom: 18px
+    }
+
+    .feature h3 {
+      margin: 0 0 8px
+    }
+
+    .feature p {
+      color: var(--mut);
+      font-size: 12px;
+      line-height: 1.6
+    }
+
+    .disc {
+      text-align: center;
+      color: #5f6775;
+      font-size: 10px;
+      margin-top: 35px
+    }
+
+    .auth {
+      position: fixed;
+      inset: 0;
+      background: #05060af2;
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      padding: 20px
+    }
+
+    .authbox {
+      width: min(420px, 95vw);
+      background: #0b0e14;
+      border: 1px solid #282f3b;
+      border-radius: 18px;
+      padding: 26px;
+      box-shadow: 0 30px 100px #000
+    }
+
+    .authbox input {
+      width: 100%;
+      margin: 6px 0;
+      padding: 12px;
+      border: 1px solid #252c38;
+      border-radius: 9px;
+      background: #07090d;
+      color: #fff;
+      outline: none
+    }
+
+    .authbox .btn {
+      width: 100%;
+      margin-top: 8px
+    }
+
+    .authbox p,
+    .switch {
+      color: var(--mut);
+      font-size: 11px
+    }
+
+    .switch {
+      text-align: center;
+      margin-top: 14px
+    }
+
+    .switch button {
+      border: 0;
+      background: none;
+      color: #fff
+    }
+
+    .notice {
+      margin-top: 12px;
+      padding: 10px;
+      border: 1px solid #20362f;
+      border-radius: 8px;
+      color: #8db1a4;
+      font-size: 10px
+    }
+
+    .app {
+      display: none;
+      min-height: 100vh
+    }
+
+    .app.on {
+      display: flex
+    }
+
+    .side {
+      width: 225px;
+      min-height: 100vh;
+      border-right: 1px solid #181d26;
+      background: #080a0eee;
+      padding: 20px 13px;
+      position: sticky;
+      top: 0
+    }
+
+    .side .brand {
+      padding: 4px 9px 25px
+    }
+
+    .navitem {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: 1px solid transparent;
+      color: #858e9e;
+      padding: 11px;
+      border-radius: 9px;
+      margin: 2px 0
+    }
+
+    .navitem:hover,
+    .navitem.active {
+      background: #11151d;
+      border-color: #202734;
+      color: #fff
+    }
+
+    .sidebottom {
+      position: absolute;
+      bottom: 14px;
+      left: 13px;
+      right: 13px
+    }
+
+    .sidecard {
+      padding: 9px;
+      border: 1px solid #202631;
+      border-radius: 8px;
+      color: #687181;
+      font-size: 9px;
+      line-height: 1.5;
+      margin-bottom: 7px
+    }
+
+    .main {
+      flex: 1;
+      min-width: 0
+    }
+
+    .top {
+      height: 65px;
+      border-bottom: 1px solid #181d26;
+      background: #07090dcc;
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      position: sticky;
+      top: 0;
+      z-index: 20
+    }
+
+    .search {
+      width: min(400px, 45vw);
+      padding: 10px 13px;
+      background: #0d1016;
+      border: 1px solid #1d232d;
+      border-radius: 9px;
+      color: #fff;
+      outline: none
+    }
+
+    .topright {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      color: #858d9c;
+      font-size: 11px
+    }
+
+    .avatar {
+      width: 33px;
+      height: 33px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #7180ff, #20e6a0);
+      display: grid;
+      place-items: center;
+      color: #030609;
+      font-weight: 900
+    }
+
+    .content {
+      max-width: 1500px;
+      margin: auto;
+      padding: 24px
+    }
+
+    .page {
+      display: none;
+      animation: in .25s ease
+    }
+
+    .page.active {
+      display: block
+    }
+
+    @keyframes in {
+      from {
+        opacity: 0;
+        transform: translateY(4px)
+      }
+    }
+
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 20px
+    }
+
+    .head h2 {
+      margin: 0;
+      font-size: 28px
+    }
+
+    .muted {
+      color: var(--mut)
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px
+    }
+
+    .card,
+    .panel {
+      background: #0b0e13;
+      border: 1px solid #191f28;
+      border-radius: 14px
+    }
+
+    .card {
+      padding: 16px
+    }
+
+    .label {
+      font-size: 9px;
+      color: #70798a;
+      text-transform: uppercase;
+      letter-spacing: 1px
+    }
+
+    .val {
+      font-size: 23px;
+      font-weight: 900;
+      margin-top: 8px
+    }
+
+    .sub {
+      font-size: 10px;
+      margin-top: 4px;
+      color: #687181
+    }
+
+    .twocol {
+      display: grid;
+      grid-template-columns: 1.5fr .85fr;
+      gap: 13px;
+      margin-top: 13px
+    }
+
+    .ptitle {
+      height: 50px;
+      padding: 0 16px;
+      border-bottom: 1px solid #191f28;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 800
+    }
+
+    .live {
+      font-size: 9px;
+      color: var(--g);
+      letter-spacing: 1px
+    }
+
+    .charthead {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px
+    }
+
+    .chartprice {
+      font-size: 22px;
+      font-weight: 900
+    }
+
+    .chartprice small {
+      font-size: 10px;
+      color: #6e7685
+    }
+
+    .chartbox {
+      height: 330px;
+      padding: 0 10px 10px
+    }
+
+    .chartbox canvas {
+      width: 100%;
+      height: 100%
+    }
+
+    .filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px
+    }
+
+    .filter {
+      padding: 7px 10px;
+      background: #0d1016;
+      color: #7e8797;
+      border: 1px solid #1e2530;
+      border-radius: 8px;
+      font-size: 10px
+    }
+
+    .filter.active {
+      color: #fff;
+      border-color: #465064;
+      background: #151a23
+    }
+
+    .mover-chart-row {
+      display: grid;
+      grid-template-columns: 28px 1.2fr 96px 110px 78px 42px 42px;
+      gap: 8px;
+      align-items: center;
+      padding: 9px 10px;
+      border-bottom: 1px solid #171b23;
+      min-height: 54px;
+      cursor: pointer
+    }
+
+    .mover-chart-row:hover {
+      background: #10141c
+    }
+
+    .mover-name {
+      min-width: 0
+    }
+
+    .mover-name b {
+      display: block;
+      color: #f2f4f8;
+      font-size: 11px
+    }
+
+    .mover-name small {
+      display: block;
+      color: #697386;
+      font-size: 8px;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .mover-mini-chart {
+      height: 30px;
+      width: 96px
+    }
+
+    .mover-mini-chart svg {
+      width: 100%;
+      height: 100%
+    }
+
+    .mover-price {
+      font-size: 10px;
+      color: #e8ebf2;
+      text-align: right
+    }
+
+    .mover-change {
+      font-size: 10px;
+      text-align: right;
+      font-weight: 800
+    }
+
+    .mover-chart-row .mini {
+      padding: 5px 6px;
+      font-size: 8px
+    }
+
+    .chart-legend {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 14px 12px;
+      font-size: 9px;
+      letter-spacing: .4px
+    }
+
+    .community-panel {
+      border-top: 1px solid #171c25;
+      padding: 12px 12px 4px;
+      max-height: 620px;
+      overflow-y: auto
+    }
+
+    .community-sub {
+      color: #5f6877;
+      font-size: 9px;
+      margin: -5px 0 8px
+    }
+
+    .sample-tag {
+      font-size: 8px;
+      color: #8791a1;
+      border: 1px solid #29313d;
+      border-radius: 5px;
+      padding: 2px 5px;
+      margin-left: 5px;
+      letter-spacing: .5px
+    }
+
+    .comment {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 8px;
+      padding: 9px 0;
+      border-top: 1px solid #151a22
+    }
+
+    .comment-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #151b24;
+      border: 1px solid #29313d;
+      color: #aeb7c6;
+      font-size: 9px;
+      font-weight: 900
+    }
+
+    .comment-name {
+      font-size: 10px;
+      font-weight: 800;
+      color: #e8ebf2
+    }
+
+    .comment-time {
+      font-size: 8px;
+      color: #606a79;
+      margin-left: 5px;
+      font-weight: 500
+    }
+
+    .comment-text {
+      font-size: 10px;
+      color: #9ca5b4;
+      line-height: 1.45;
+      margin-top: 2px
+    }
+
+    .comment-tag {
+      display: inline-block;
+      font-size: 7px;
+      color: #687282;
+      border: 1px solid #242b36;
+      border-radius: 4px;
+      padding: 1px 4px;
+      margin-left: 5px;
+      vertical-align: 1px
+    }
+
+    .buy-key {
+      color: var(--g);
+      font-weight: 850
+    }
+
+    .sell-key {
+      color: var(--r);
+      font-weight: 850
+    }
+
+    .legend-note {
+      color: #626b7a
+    }
+
+    .trade-buy,
+    .trade-sell {
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: 1px solid;
+      font-weight: 850
+    }
+
+    .trade-buy {
+      background: #20e6a014;
+      color: var(--g);
+      border-color: #20e6a044
+    }
+
+    .trade-sell {
+      background: #ff527014;
+      color: var(--r);
+      border-color: #ff527044
+    }
+
+    .chart-actions {
+      display: flex;
+      gap: 8px;
+      padding: 0 12px 10px
+    }
+
+    .chart-actions button {
+      flex: 1
+    }
+
+    .asset {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 90px;
+      gap: 8px;
+      padding: 12px;
+      border-bottom: 1px solid #151a22;
+      align-items: center;
+      font-size: 11px
+    }
+
+    .asset:hover {
+      background: #10141a
+    }
+
+    .asset:last-child {
+      border: 0
+    }
+
+    .assetname {
+      font-weight: 850
+    }
+
+    .assetname small {
+      display: block;
+      color: #687181;
+      font-weight: 500;
+      margin-top: 2px
+    }
+
+    .watch {
+      background: none;
+      border: 0;
+      color: #535c6d;
+      font-size: 16px
+    }
+
+    .watch.on {
+      color: #ffd166
+    }
+
+    .mini {
+      padding: 6px 8px;
+      border-radius: 7px;
+      border: 1px solid #222a35;
+      background: #10141b;
+      color: #fff;
+      font-size: 9px
+    }
+
+    .mini:hover {
+      border-color: #5a667a
+    }
+
+    .empty {
+      text-align: center;
+      padding: 35px;
+      color: #687181
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    .table th {
+      text-align: left;
+      padding: 11px;
+      color: #687181;
+      font-size: 9px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #1a2029
+    }
+
+    .table td {
+      padding: 12px;
+      border-bottom: 1px solid #151a22;
+      font-size: 11px
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: #000b;
+      backdrop-filter: blur(7px);
+      z-index: 90;
+      display: none;
+      place-items: center
+    }
+
+    .modal.on {
+      display: grid
+    }
+
+    .modalbox {
+      width: min(420px, 94vw);
+      background: #0c0f15;
+      border: 1px solid #2a3140;
+      border-radius: 17px;
+      padding: 21px;
+      box-shadow: 0 30px 100px #000
+    }
+
+    .modalbox input {
+      width: 100%;
+      padding: 12px;
+      background: #07090d;
+      color: #fff;
+      border: 1px solid #242b37;
+      border-radius: 9px;
+      margin: 12px 0
+    }
+
+    .modalactions {
+      display: flex;
+      gap: 8px
+    }
+
+    .modalactions button {
+      flex: 1
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: #11161e;
+      border: 1px solid #293140;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 11px;
+      z-index: 200;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: .2s
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: none
+    }
+
+    @media(max-width:1000px) {
+      .side {
+        width: 185px
+      }
+
+      .cards {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .twocol {
+        grid-template-columns: 1fr
+      }
+
+      .fgrid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .navlinks {
+        display: none
+      }
+    }
+
+    @media(max-width:700px) {
+      .side {
+        display: none
+      }
+
+      .top {
+        padding: 0 12px
+      }
+
+      .content {
+        padding: 14px
+      }
+
+      .fgrid {
+        grid-template-columns: 1fr
+      }
+
+      .screen {
+        grid-template-columns: 1fr
+      }
+
+      .sidefake {
+        display: none
+      }
+
+      h1 {
+        letter-spacing: -3px
+      }
+
+      .topright>span {
+        display: none
+      }
+    }
+
+    /* NovaTrade dense-terminal refresh */
+    .app {
+      background: #06080c
+    }
+
+    .main {
+      background: linear-gradient(180deg, #07090d, #05060a)
+    }
+
+    .top {
+      height: 64px;
+      background: #080a0f;
+      border-bottom: 1px solid #1b2029;
+      padding: 0 18px;
+      gap: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 20
+    }
+
+    .top:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #5367ff, transparent);
+      opacity: .45
+    }
+
+    .top .brandmini {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      white-space: nowrap
+    }
+
+    .topnav {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      overflow: auto;
+      flex: 1
+    }
+
+    .topnav button {
+      background: transparent;
+      border: 0;
+      color: #8c95a8;
+      padding: 9px 11px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700
+    }
+
+    .topnav button:hover,
+    .topnav button.active {
+      background: #121722;
+      color: #fff
+    }
+
+    .search {
+      min-width: 230px;
+      max-width: 330px !important;
+      height: 38px !important;
+      background: #0d1118 !important;
+      border: 1px solid #242b37 !important;
+      border-radius: 9px !important
+    }
+
+    .market-shell {
+      border: 1px solid #202631;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #0b0d12;
+      box-shadow: 0 20px 70px rgba(0, 0, 0, .22)
+    }
+
+    .market-head {
+      display: grid;
+      grid-template-columns: 40px minmax(245px, 1.7fr) 92px 92px 92px 110px 145px 112px;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #0d1016;
+      color: #667084;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      border-bottom: 1px solid #202631
+    }
+
+    .market-row {
+      display: grid;
+      grid-template-columns: 40px minmax(245px, 1.7fr) 92px 92px 92px 110px 145px 112px;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 14px;
+      border-bottom: 1px solid #171b23;
+      min-height: 64px;
+      transition: .16s;
+      background: #0b0d12
+    }
+
+    .market-row:hover {
+      background: #10141c
+    }
+
+    .market-row:last-child {
+      border-bottom: 0
+    }
+
+    .coin-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 10px;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, #27325c, #6f7dff);
+      border: 1px solid #3b4566;
+      box-shadow: 0 0 18px rgba(90, 105, 255, .12)
+    }
+
+    .coin-main {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0
+    }
+
+    .coin-title {
+      font-weight: 800;
+      color: #f2f4f8;
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .coin-title span {
+      font-weight: 500;
+      color: #778196;
+      margin-left: 5px
+    }
+
+    .coin-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 5px;
+      font-size: 9px;
+      color: #697386
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #151a24;
+      border: 1px solid #242c39;
+      color: #8791a5;
+      font-size: 8px
+    }
+
+    .spark {
+      height: 30px;
+      width: 72px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .spark svg {
+      width: 100%;
+      height: 100%
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 11px;
+      color: #e8ebf2
+    }
+
+    .metric small {
+      display: block;
+      color: #697386;
+      font-size: 9px;
+      margin-top: 3px
+    }
+
+    .delta {
+      font-size: 11px;
+      font-weight: 800
+    }
+
+    .actionbtn {
+      border: 0;
+      border-radius: 9px;
+      background: #5d70ff;
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 9px 12px;
+      box-shadow: 0 5px 20px rgba(93, 112, 255, .18)
+    }
+
+    .actionbtn:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px)
+    }
+
+    .watchdot {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      border: 1px solid #242b37;
+      background: #0e1219;
+      color: #6d7789
+    }
+
+    .watchdot.on {
+      color: #ffd35d;
+      border-color: #5d4c20;
+      background: #19160d
+    }
+
+    .market-tabs {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #202631;
+      background: #0a0d12
+    }
+
+    .market-tabs .filter {
+      font-size: 10px
+    }
+
+    .market-count {
+      margin-left: auto;
+      color: #687286;
+      font-size: 10px
+    }
+
+    .pulse-strip {
+      display: flex;
+      gap: 8px;
+      overflow: auto;
+      padding: 10px 0 4px
+    }
+
+    .pulse-card {
+      min-width: 170px;
+      background: #0d1118;
+      border: 1px solid #202733;
+      border-radius: 9px;
+      padding: 9px
+    }
+
+    .pulse-card b {
+      font-size: 11px
+    }
+
+    .pulse-card .small {
+      font-size: 9px;
+      color: #697386;
+      margin-top: 4px
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 14px 0 9px
+    }
+
+    .section-title h3 {
+      margin: 0;
+      font-size: 13px
+    }
+
+    .green-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #21e5a0;
+      box-shadow: 0 0 10px #21e5a0
+    }
+
+    @media(max-width:1200px) {
+
+      .market-head,
+      .market-row {
+        grid-template-columns: 34px minmax(190px, 1.7fr) 80px 80px 80px 100px 120px
+      }
+
+      .market-head>:nth-child(7),
+      .market-row>:nth-child(7) {
+        display: none
+      }
+    }
+
+    @media(max-width:900px) {
+      .topnav {
+        display: none
+      }
+
+      .market-head,
+      .market-row {
+        grid-template-columns: 34px minmax(170px, 1fr) 85px 85px 105px
+      }
+
+      .market-head>:nth-child(4),
+      .market-row>:nth-child(4),
+      .market-head>:nth-child(5),
+      .market-row>:nth-child(5) {
+        display: none
+      }
+    }
+
+    .chart-actions {
+      display: flex;
+      gap: 8px;
+      padding: 0 12px 10px
+    }
+
+    .chart-actions button {
+      flex: 1;
+      border: 0;
+      border-radius: 8px;
+      padding: 10px;
+      font-weight: 800;
+      font-size: 11px;
+      cursor: pointer;
+      transition: .15s
+    }
+
+    .trade-buy {
+      background: #20d99a;
+      color: #04120d
+    }
+
+    .trade-sell {
+      background: #ff5270;
+      color: #19040a
+    }
+
+    .chart-actions button:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px)
+    }
+
     <style>
-        
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-     
-        .required-asterisk::after {
-            content: '*';
-            color: #ef4444; 
-            margin-left: 0.25rem;
-        }
-    </style>
+
+    /* Responsive NovaTrade layout */
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden
+    }
+
+    .app,
+    .main,
+    .content,
+    .page,
+    .twocol,
+    .panel,
+    .card {
+      min-width: 0;
+      max-width: 100%
+    }
+
+    @media(max-width:700px) {
+      .app.on {
+        display: block
+      }
+
+      .main {
+        width: 100%;
+        min-width: 0
+      }
+
+      .top {
+        height: auto;
+        min-height: 58px;
+        padding: 8px 10px;
+        gap: 8px;
+        flex-wrap: wrap
+      }
+
+      .topnav {
+        display: none
+      }
+
+      .search {
+        width: 100%;
+        max-width: none;
+        order: 3;
+        flex: 1 1 100%;
+        min-width: 0
+      }
+
+      .topright {
+        margin-left: auto;
+        gap: 7px
+      }
+
+      .topright .cash {
+        display: none
+      }
+
+      .content {
+        padding: 10px;
+        width: 100%;
+      }
+
+      .head {
+        align-items: flex-start;
+        margin-bottom: 12px;
+        gap: 8px;
+        flex-wrap: wrap
+      }
+
+      .head h2 {
+        font-size: 22px
+      }
+
+      .cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px
+      }
+
+      .card {
+        padding: 12px;
+        min-width: 0
+      }
+
+      .val {
+        font-size: 18px;
+        overflow-wrap: anywhere
+      }
+
+      .twocol {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px
+      }
+
+      .panel {
+        width: 100%;
+        overflow: hidden;
+        border-radius: 10px
+      }
+
+      .chartbox {
+        height: 230px;
+        padding: 0 6px 8px
+      }
+
+      .chartprice {
+        font-size: 18px
+      }
+
+      .charthead {
+        padding: 12px
+      }
+
+      .chart-actions {
+        padding: 0 10px 9px
+      }
+
+      .chart-actions button {
+        min-height: 42px
+      }
+
+      .filters {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch
+      }
+
+      .filter {
+        flex: 0 0 auto;
+        min-height: 40px
+      }
+
+      .mover-chart-row {
+        grid-template-columns: 24px minmax(0, 1fr) 78px 58px 34px 34px 34px;
+        gap: 5px;
+        padding: 8px 7px;
+        font-size: 10px
+      }
+
+      .mover-chart-row .spark {
+        display: none
+      }
+
+      .community-panel {
+        padding: 10px 10px 2px
+      }
+
+      .comment {
+        grid-template-columns: 28px minmax(0, 1fr);
+        gap: 7px
+      }
+
+      .comment-text {
+        overflow-wrap: anywhere
+      }
+
+      .market-shell {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch
+      }
+
+      .market-head,
+      .market-row {
+        min-width: 650px
+      }
+
+      .market-head {
+        grid-template-columns: 34px minmax(180px, 1fr) 85px 85px 105px 100px 100px 95px
+      }
+
+      .market-row {
+        grid-template-columns: 34px minmax(180px, 1fr) 85px 85px 105px 100px 100px 95px
+      }
+
+      .table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap
+      }
+
+      .modal {
+        width: calc(100% - 20px);
+        max-width: 420px
+      }
+
+      .landing {
+        overflow-x: hidden
+      }
+    }
+
+    @media(max-width:380px) {
+      .content {
+        padding: 8px
+      }
+
+      .cards {
+        grid-template-columns: 1fr
+      }
+
+      .chartbox {
+        height: 205px
+      }
+
+      .top {
+        padding: 7px 8px
+      }
+
+      .mover-chart-row {
+        grid-template-columns: 22px minmax(0, 1fr) 68px 52px 30px 30px 30px
+      }
+    }
+  </style>
+  </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
-    <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-8 space-y-8">
-      
-        <div class="text-center">
-            <h1 class="text-3xl font-bold text-gray-800">School Registration by Paul</h1>
-            <p class="mt-2 text-gray-600">Please fill out the form below to enroll.</p>
-        </div>
-        
-       
-        <form action="#" method="POST" class="space-y-6">
-           
-            <fieldset class="p-6 border border-gray-200 rounded-lg">
-                <legend class="text-xl font-semibold text-gray-700 px-2">Personal Information</legend>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                   
-                    <div>
-                        <label for="full-name" class="block text-sm font-medium text-gray-700 required-asterisk">Full Name</label>
-                        <input type="text" name="full-name" id="full-name" placeholder="Juan Dela Cruz" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" required>
-                    </div>
 
-                   
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 required-asterisk">Email Address</label>
-                        <input type="email" name="email" id="email" placeholder="you@example.com" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" required>
-                    </div>
-
-                   
-                    <div>
-                        <label for="phone-number" class="block text-sm font-medium text-gray-700 required-asterisk">Phone Number</label>
-                        <input type="tel" name="phone-number" id="phone-number" placeholder="0912-345-6789" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" required>
-                    </div>
-
-                 
-                    <div>
-                        <label for="dob" class="block text-sm font-medium text-gray-700 required-asterisk">Date of Birth</label>
-                        <input type="date" name="dob" id="dob" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 text-gray-500" required>
-                    </div>
-
-                  
-                    <div class="md:col-span-2">
-                        <label for="address" class="block text-sm font-medium text-gray-700 required-asterisk">Address</label>
-                        <input type="text" name="address" id="address" placeholder="block 2, LABM, Lapu-Lapu City" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" required>
-                    </div>
-                </div>
-            </fieldset>
-
-            
-            <fieldset class="p-6 border border-gray-200 rounded-lg">
-                <legend class="text-xl font-semibold text-gray-700 px-2">Course Information</legend>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-
-                    <div>
-                        <label for="course" class="block text-sm font-medium text-gray-700 required-asterisk">Select a Course</label>
-                        <select id="course" name="course" class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" required>
-                            <option value="" disabled selected>Please select an option</option>
-                            <option value="comptech">Computer Technology</option>
-                            <option value="electronic">Electronics</option>
-                            <option value="tourism">Tourism</option>
-                            <option value="Education">Education</option>
-                        </select>
-                    </div>
-
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 required-asterisk">Gender</label>
-                        <div class="mt-2 flex items-center space-x-6">
-                            <label for="male" class="flex items-center">
-                                <input id="male" name="gender" type="radio" value="male" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" required>
-                                <span class="ml-2 text-sm text-gray-700">Male</span>
-                            </label>
-                            <label for="female" class="flex items-center">
-                                <input id="female" name="gender" type="radio" value="female" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                                <span class="ml-2 text-sm text-gray-700">Female</span>
-                            </label>
-                            <label for="other" class="flex items-center">
-                                <input id="other" name="gender" type="radio" value="other" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                                <span class="ml-2 text-sm text-gray-700">Other</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-            
-            
-            <div>
-             
-            <div>
-                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:scale-105">
-                    Register Now
-                </button>
+<body>
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <section id="landing" class="landing">
+    <nav class="nav">
+      <div class="brand">
+        <div class="logo"></div>NovaTrade
+      </div>
+      <div class="navlinks"><a href="#features">Features</a><a href="#terminal">Terminal</a><a href="#about">About</a>
+      </div>
+      <div><button class="btn" onclick="auth('login')">Log in</button> <button class="btn primary"
+          onclick="auth('signup')">Create account</button></div>
+    </nav>
+    <div class="hero">
+      <div class="badge"><span class="dot"></span> DISCOVER • NOVATRADE</div>
+      <h1>Trade the market.<br><span class="grad">Move with the market.</span></h1>
+      <p>A modern trading terminal with animated markets, moving candlesticks, watchlists and portfolio tracking.</p>
+      <div class="actions"><button class="btn primary" onclick="auth('signup')">Start Trading →</button><button
+          class="btn" onclick="document.getElementById('terminal').scrollIntoView({behavior:'smooth'})">Explore
+          terminal</button></div>
+      <div class="trust">DENSE MARKET DISCOVERY • NOVATRADE</div>
+      <div id="terminal" class="terminal">
+        <div class="dots"><i class="wd"></i><i class="wd"></i><i class="wd"></i><span style="margin-left:8px">novatrade
+            / markets / BTC</span></div>
+        <div class="screen">
+          <div class="chartmock"><b>BTC / USD</b> <span class="up">+2.41%</span><svg viewBox="0 0 800 300"
+              preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="gg" x1="0" y1="0" x2="0" y2="1">
+                  <stop stop-color="#20e6a0" stop-opacity=".25" />
+                  <stop offset="1" stop-color="#20e6a0" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M0 240C55 215 70 230 120 190S185 215 235 155S300 180 350 130S410 150 465 95S540 145 595 82S660 110 720 55S765 75 800 30L800 300L0 300Z"
+                fill="url(#gg)" />
+              <path
+                d="M0 240C55 215 70 230 120 190S185 215 235 155S300 180 350 130S410 150 465 95S540 145 595 82S660 110 720 55S765 75 800 30"
+                fill="none" stroke="#20e6a0" stroke-width="3" />
+            </svg></div>
+          <div class="sidefake"><small class="muted">MARKET PRICE</small>
+            <div id="heroPrice" class="price">$114,850</div><span class="up">▲ 2.41%</span>
+            <div class="fake">
+              <div><span>BTC</span><b class="up">+2.41%</b></div>
+              <div><span>ETH</span><b class="up">+1.18%</b></div>
+              <div><span>SOL</span><b class="down">-0.52%</b></div>
+              <div><span>NVDA</span><b class="up">+0.84%</b></div>
             </div>
-        </form>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="ticker">
+      <div id="tickerin" class="tickerin"></div>
+    </div>
+    <div id="features" class="features">
+      <div class="ftitle">
+        <div class="eyebrow">The terminal</div>
+        <h2>Everything moves.</h2>
+        <p>Built to feel alive while staying easy to understand. Prices, candles, movers and portfolio values
+          continuously update in your browser.</p>
+      </div>
+      <div class="fgrid">
+        <div class="feature">
+          <div class="ico">↗</div>
+          <h3>Moving markets</h3>
+          <p>Animated prices create green and red market movement.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">◫</div>
+          <h3>Live-style charts</h3>
+          <p>Switch assets and watch the interactive candlestick chart update.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">◈</div>
+          <h3>Portfolio</h3>
+          <p>Start with cash and track orders and positions.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">★</div>
+          <h3>Watchlists</h3>
+          <p>Star assets and keep the markets you care about together.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">⌁</div>
+          <h3>Simple access</h3>
+          <p>Open NovaTrade directly in Chrome or Edge with a clean, focused interface.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">✓</div>
+          <h3>Built for speed</h3>
+          <p>Fast navigation, responsive layouts and a focused trading workspace.</p>
+        </div>
+      </div>
+      <div id="about" class="disc">NovaTrade is a modern browser-based trading terminal built around a fast, interactive
+        market experience.</div>
+    </div>
+  </section>
+  <div id="authbox" class="auth hidden">
+    <div class="authbox">
+      <div class="brand">
+        <div class="logo"></div>NovaTrade
+      </div>
+      <h2 id="atitle" style="margin-top:22px">Create your account</h2>
+      <p id="asub">Create your NovaTrade account.</p><input id="email" type="email" placeholder="Email"><input id="pass"
+        type="password" placeholder="Password"><button id="authbtn" class="btn primary" onclick="submitAuth()">Create
+        account</button>
+      <div class="switch"><span id="switchtext">Already have an account?</span> <button onclick="toggleAuth()">Log
+          in</button></div>
+      <div class="notice">Secure NovaTrade account access.</div><button class="btn" style="width:100%;margin-top:9px"
+        onclick="closeAuth()">Cancel</button>
+    </div>
+  </div>
+  <div id="app" class="app">
+    <aside class="side">
+      <div class="brand">
+        <div class="logo"></div>NovaTrade
+      </div><button class="navitem active" onclick="go('dashboard',this)">⌂ Dashboard</button><button class="navitem"
+        onclick="go('markets',this)">◉ Markets</button><button class="navitem" onclick="go('watchlist',this)">★
+        Watchlist</button><button class="navitem" onclick="go('portfolio',this)">▣ Portfolio</button><button
+        class="navitem" onclick="go('history',this)">↺ History</button><button id="adminnav" class="navitem"
+        onclick="go('admin',this)">⚙ Admin</button>
+      <div class="sidebottom">
+        <div class="sidecard">NOVATRADE<br>Advanced market terminal.</div><button class="btn" style="width:100%"
+          onclick="logout()">Log out</button>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="top">
+        <div class="brandmini">
+          <div class="logo"></div>NovaTrade
+        </div>
+        <nav class="topnav">
+          <button class="active" onclick="go('markets',document.querySelectorAll('.navitem')[1])">Discover</button>
+          <button onclick="go('markets',document.querySelectorAll('.navitem')[1])">Pulse</button>
+          <button onclick="go('watchlist',document.querySelectorAll('.navitem')[2])">Trackers</button>
+          <button onclick="go('portfolio',document.querySelectorAll('.navitem')[3])">Portfolio</button>
+          <button onclick="go('history',document.querySelectorAll('.navitem')[4])">Activity</button>
+        </nav>
+        <input id="search" class="search" placeholder="Search token or market..." oninput="search(this.value)">
+        <div class="topright"><span>Cash <b id="topcash">$100.00</b></span>
+          <div id="avatar" class="avatar">N</div>
+        </div>
+      </header>
+      <div class="content">
+        <section id="page-dashboard" class="page active">
+          <div class="head">
+            <div>
+              <h2>Dashboard</h2>
+              <div class="muted">Your market terminal.</div>
+            </div><button class="btn greenbtn" onclick="go('markets',document.querySelectorAll('.navitem')[1])">Open
+              markets →</button>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <div class="label">Account value</div>
+              <div id="acct" class="val">$100.00</div>
+              <div class="sub">USD</div>
+            </div>
+            <div class="card">
+              <div class="label">Available cash</div>
+              <div id="cash" class="val">$100.00</div>
+              <div class="sub">Available</div>
+            </div>
+            <div class="card">
+              <div class="label">Total P/L</div>
+              <div id="pl" class="val">$0.00</div>
+              <div id="plsub" class="sub">No positions</div>
+            </div>
+            <div class="card">
+              <div class="label">Market status</div>
+              <div class="val" style="font-size:18px"><span class="dot" style="display:inline-block"></span> Live</div>
+              <div class="sub">Live feed</div>
+            </div>
+          </div>
+          <div class="twocol">
+            <div class="panel">
+              <div class="ptitle">Price chart <span class="live">● LIVE</span></div>
+              <div class="charthead">
+                <div><b id="csym">BTC</b>
+                  <div id="cprice" class="chartprice">$114,850 <small>USD</small></div>
+                </div>
+                <div id="cchange" class="up">+0.00%</div>
+              </div>
+              <div class="chartbox"><canvas id="canvas"></canvas></div>
+              <div class="chart-actions">
+                <button class="trade-buy" id="chartBuy" onclick="openTrade(cur,'buy')">Buy <span
+                    id="chartBuySym">BTC</span></button>
+                <button class="trade-sell" id="chartSell" onclick="openTrade(cur,'sell')">Sell <span
+                    id="chartSellSym">BTC</span></button>
+              </div>
+              <div class="chart-legend"><span class="buy-key">B</span><span class="sell-key">S</span><span
+                  class="legend-note">B/S marks the exact candle where you bought or sold.</span></div>
+              <div id="periods" class="filters" style="padding:0 12px 12px;margin:0"><button class="filter active"
+                  onclick="period('1m',this)">1m</button><button class="filter"
+                  onclick="period('5m',this)">5m</button><button class="filter"
+                  onclick="period('30m',this)">30m</button><button class="filter"
+                  onclick="period('1h',this)">1h</button></div>
+              <div class="community-panel">
+                <div class="ptitle">Community activity</div>
+                <div id="comments"></div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="ptitle">Market movers <span class="live">LIVE</span></div>
+              <div id="movers"></div>
+            </div>
+          </div>
+        </section>
+        <section id="page-markets" class="page">
+          <div class="head">
+            <div>
+              <h2>Discover</h2>
+              <div class="muted">Trending markets, memecoins, stocks and digital assets.</div>
+            </div>
+            <div class="green-dot"></div>
+          </div>
+          <div class="pulse-strip">
+            <div class="pulse-card"><b>🔥 Trending</b>
+              <div class="small">Fast-moving markets</div>
+            </div>
+            <div class="pulse-card"><b>⚡ Movers</b>
+              <div class="small">Largest percentage changes</div>
+            </div>
+            <div class="pulse-card"><b>◎ New Picks</b>
+              <div class="small">Freshly added markets</div>
+            </div>
+            <div class="pulse-card"><b>◈ Blue Chips</b>
+              <div class="small">Major stocks & ETFs</div>
+            </div>
+          </div>
+          <div id="filters" class="market-tabs"></div>
+          <div class="market-shell">
+            <div class="market-head"><span></span><span>Pair
+                info</span><span>Price</span><span>Change</span><span>Market
+                cap</span><span>Volume</span><span>Activity</span><span>Action</span></div>
+            <div id="markets"></div>
+          </div>
+        </section>
+        <section id="page-watchlist" class="page">
+          <div class="head">
+            <div>
+              <h2>Watchlist</h2>
+              <div class="muted">Star the assets you want to follow.</div>
+            </div>
+          </div>
+          <div class="panel">
+            <div id="watchlist"></div>
+          </div>
+        </section>
+        <section id="page-portfolio" class="page">
+          <div class="head">
+            <div>
+              <h2>Portfolio</h2>
+              <div class="muted">Your positions.</div>
+            </div>
+          </div>
+          <div class="panel">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Asset</th>
+                  <th>Qty</th>
+                  <th>Avg</th>
+                  <th>Current</th>
+                  <th>Value</th>
+                  <th>P/L</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="portfolio"></tbody>
+            </table>
+          </div>
+        </section>
+        <section id="page-history" class="page">
+          <div class="head">
+            <div>
+              <h2>History</h2>
+              <div class="muted">Your orders.</div>
+            </div>
+          </div>
+          <div class="panel">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Side</th>
+                  <th>Asset</th>
+                  <th>Qty</th>
+                  <th>Price</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="history"></tbody>
+            </table>
+          </div>
+        </section>
+        <section id="page-admin" class="page">
+          <div class="head">
+            <div>
+              <h2>Admin</h2>
+              <div class="muted">funds only.</div>
+            </div>
+          </div>
+          <div class="panel">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Cash</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="admin"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <div id="trade" class="modal">
+    <div class="modalbox">
+      <h3 id="ttitle">Buy BTC</h3>
+      <div id="tinfo" class="muted" style="font-size:11px"></div><input id="qty" type="number" min=".000001" step="any"
+        value="1" oninput="estimate()">
+      <div class="card">
+        <div class="label">Estimated value</div>
+        <div id="estimate" class="val">$0.00</div>
+      </div>
+      <div class="modalactions" style="margin-top:12px"><button class="btn"
+          onclick="closeTrade()">Cancel</button><button id="confirm" class="btn greenbtn"
+          onclick="confirmTrade()">Confirm</button></div>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script>
+    const A = {
+      BTC: ['Bitcoin', 'Crypto', 114850, .007],
+      ETH: ['Ethereum', 'Crypto', 4210, .009],
+      SOL: ['Solana', 'Crypto', 238, .015],
+      XRP: ['XRP', 'Crypto', 2.91, .018],
+      ADA: ['Cardano', 'Crypto', .81, .017],
+      AVAX: ['Avalanche', 'Crypto', 35.8, .014],
+      LINK: ['Chainlink', 'Crypto', 22.4, .012],
+      DOT: ['Polkadot', 'Crypto', 4.25, .015],
+      TRX: ['TRON', 'Crypto', .35, .009],
+      SUI: ['Sui', 'Crypto', 3.48, .018],
+      TON: ['Toncoin', 'Crypto', 3.12, .016],
+      SHIB: ['Shiba Inu', 'Memecoin', .0000142, .022],
+      PEPE: ['Pepe', 'Memecoin', .0000098, .028],
+      BONK: ['Bonk', 'Memecoin', .000019, .031],
+      WIF: ['dogwifhat', 'Memecoin', .00074, .034],
+      FLOKI: ['FLOKI', 'Memecoin', .000061, .027],
+      BRETT: ['Brett', 'Memecoin', .012, .033],
+      MOG: ['Mog Coin', 'Memecoin', .0000011, .038],
+      POPCAT: ['Popcat', 'Memecoin', .19, .036],
+      MEW: ['cat in a dogs world', 'Memecoin', .0021, .04],
+      TURBO: ['Turbo', 'Memecoin', .0034, .037],
+      PNUT: ['Peanut the Squirrel', 'Memecoin', .17, .041],
+      BOME: ['BOOK OF MEME', 'Memecoin', .00072, .039],
+      DOGE: ['Dogecoin', 'Memecoin', .238, .026],
+      AAPL: ['Apple', 'Stocks', 254, .004],
+      MSFT: ['Microsoft', 'Stocks', 514, .0035],
+      NVDA: ['NVIDIA', 'Stocks', 183, .006],
+      TSLA: ['Tesla', 'Stocks', 447, .009],
+      AMZN: ['Amazon', 'Stocks', 231, .0045],
+      META: ['Meta', 'Stocks', 744, .005],
+      GOOGL: ['Alphabet', 'Stocks', 242, .004],
+      NFLX: ['Netflix', 'Stocks', 1190, .005],
+      AMD: ['AMD', 'Stocks', 164, .007],
+      AVGO: ['Broadcom', 'Stocks', 382, .005],
+      PLTR: ['Palantir', 'Stocks', 151, .008],
+      COIN: ['Coinbase', 'Stocks', 350, .009],
+      HOOD: ['Robinhood', 'Stocks', 142, .011],
+      MSTR: ['Strategy', 'Stocks', 342, .012],
+      JPM: ['JPMorgan', 'Stocks', 314, .0035],
+      V: ['Visa', 'Stocks', 345, .003],
+      WMT: ['Walmart', 'Stocks', 105, .003],
+      DIS: ['Disney', 'Stocks', 112, .005],
+      SPY: ['S&P 500 ETF', 'ETFs', 672, .0025],
+      QQQ: ['Nasdaq 100 ETF', 'ETFs', 598, .003],
+      DIA: ['Dow ETF', 'ETFs', 469, .002],
+      VTI: ['Total Market ETF', 'ETFs', 332, .002],
+      IWM: ['Russell 2000 ETF', 'ETFs', 235, .0035],
+      SPX: ['S&P 500 Index', 'Indices', 6720, .002],
+      NDX: ['Nasdaq 100 Index', 'Indices', 24850, .003],
+      DJI: ['Dow Jones', 'Indices', 46500, .002],
+      EURUSD: ['Euro / USD', 'Forex', 1.174, .0015],
+      GBPUSD: ['Pound / USD', 'Forex', 1.341, .0017],
+      USDJPY: ['USD / Yen', 'Forex', 148.2, .0014],
+      GOLD: ['Gold', 'Commodities', 3860, .0025],
+      SILVER: ['Silver', 'Commodities', 47.2, .004],
+      OIL: ['Crude Oil', 'Commodities', 72.5, .006]
+    };
+    let P = {}, cur = 'BTC', data = [], periodName = '1m', filter = 'All', q = '', user = null, mode = 'signup', tradeSym = '', side = 'buy';
+    let chartMarks = {}, chartSeries = {}, chartSeriesPeriod = {}; for (const s in A) P[s] = { price: A[s][2], base: A[s][2], vol: A[s][3] }; let users = JSON.parse(localStorage.getItem('nova_users') || '{}'); if (!users['admin@novatrade.local']) users['admin@novatrade.local'] = { password: 'Admin123!', cash: 1000000, holdings: {}, history: [], watch: [], chartMarks: {} }; save();
+    const $ = id => document.getElementById(id), fmt = n => { n = Number(n); if (!Number.isFinite(n)) return '$0.00'; let a = Math.abs(n); let max = a < 0.01 ? 8 : a < 1 ? 5 : 2; return '$' + n.toLocaleString(undefined, { minimumFractionDigits: Math.min(2, max), maximumFractionDigits: max }); }; function save() { localStorage.setItem('nova_users', JSON.stringify(users)) }
+    function ensureChartMarks() { if (user) { users[user].chartMarks = users[user].chartMarks || {}; chartMarks = users[user].chartMarks; } }
+    function addChartMark(symbol, tradeSide, tradePrice) {
+      ensureChartMarks();
+      chartMarks[symbol] = chartMarks[symbol] || [];
+      const candle = data.at(-1);
+      chartMarks[symbol].push({ side: tradeSide, price: tradePrice, candleId: candle?.id || null, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+      if (chartMarks[symbol].length > 10) chartMarks[symbol].shift();
+      users[user].chartMarks = chartMarks;
+      save();
+    } function toast(x) { let t = $('toast'); t.textContent = x; t.classList.add('show'); clearTimeout(window.tm); window.tm = setTimeout(() => t.classList.remove('show'), 2200) }
+    function auth(m) { mode = m; $('authbox').classList.remove('hidden'); renderAuth() } function closeAuth() { $('authbox').classList.add('hidden') } function toggleAuth() { mode = mode === 'signup' ? 'login' : 'signup'; renderAuth() } function renderAuth() { let s = mode === 'signup'; $('atitle').textContent = s ? 'Create your account' : 'Welcome back'; $('asub').textContent = s ? 'Create your NovaTrade account.' : 'Log in to your NovaTrade terminal.'; $('authbtn').textContent = s ? 'Create account' : 'Log in'; $('switchtext').textContent = s ? 'Already have an account?' : 'Need an account?'; $('switchtext').nextElementSibling.textContent = s ? 'Log in' : 'Sign up' }
+    function submitAuth() { let e = $('email').value.trim().toLowerCase(), p = $('pass').value; if (!e || !p) return toast('Enter email and password.'); if (mode === 'signup') { if (users[e]) return toast('Account already exists.'); users[e] = { password: p, cash: 100, holdings: {}, history: [], watch: ['BTC', 'ETH', 'SOL', 'NVDA'], chartMarks: {} }; save(); user = e } else { if (!users[e] || users[e].password !== p) return toast('Incorrect login details.'); user = e } closeAuth(); ensureChartMarks(); $('landing').style.display = 'none'; $('app').classList.add('on'); $('avatar').textContent = e[0].toUpperCase(); $('adminnav').style.display = e === 'admin@novatrade.local' ? 'block' : 'none'; render(); toast(mode === 'signup' ? 'Account created successfully.' : 'Welcome back.') } function logout() { user = null; $('app').classList.remove('on'); $('landing').style.display = 'block' }
+    function go(p, el) { document.querySelectorAll('.page').forEach(x => x.classList.remove('active')); $('page-' + p).classList.add('active'); document.querySelectorAll('.navitem').forEach(x => x.classList.remove('active')); if (el) el.classList.add('active'); render() }
+    function render() { if (!user) return; let u = users[user]; $('topcash').textContent = fmt(u.cash); renderDash(); renderFilters(); renderMarkets(); renderWatch(); renderPortfolio(); renderHistory(); renderAdmin(); changeChart(cur) }
+    function renderDash() { let u = users[user], value = u.cash, pl = 0, invest = 0; for (const s in u.holdings) { let h = u.holdings[s]; value += h.qty * P[s].price; pl += (P[s].price - h.avg) * h.qty; invest += h.qty * h.avg } $('acct').textContent = fmt(value); $('cash').textContent = fmt(u.cash); $('pl').textContent = (pl >= 0 ? '+' : '') + fmt(pl); $('pl').className = 'val ' + (pl >= 0 ? 'up' : 'down'); $('plsub').textContent = invest ? ((pl / invest * 100).toFixed(2) + '% on held positions') : 'No positions'; const movers = Object.keys(A).filter(s => ['Crypto', 'Memecoin', 'Stocks'].includes(A[s][1])); $('movers').innerHTML = movers.map(s => moverChartRow(s)).join('') }
+    function moverChartRow(s) { let a = A[s], x = P[s], c = (x.price - a[2]) / a[2] * 100, w = users[user].watch || [], on = w.includes(s); return `<div class="mover-chart-row" onclick="changeChart('${s}')"><button class="watchdot ${on ? 'on' : ''}" onclick="event.stopPropagation();watch('${s}')">${on ? '★' : '☆'}</button><div class="mover-name"><b>${s}</b><small>${a[0]}</small></div><div class="mover-mini-chart">${sparkline(s)}</div><div class="mover-price">${fmt(x.price)}</div><div class="${c >= 0 ? 'up' : 'down'} mover-change">${c >= 0 ? '+' : ''}${c.toFixed(2)}%</div><button class="mini" onclick="event.stopPropagation();openTrade('${s}','buy')">Buy</button><button class="mini" onclick="event.stopPropagation();openTrade('${s}','sell')">Sell</button></div>` }
+    function sparkline(s) { let a = A[s], seed = (s.charCodeAt(0) + s.charCodeAt(s.length - 1)) * 7; let pts = [], v = 30; for (let i = 0; i < 14; i++) { seed = (seed * 9301 + 49297) % 233280; v += ((seed / 233280) - .48) * a[3] * 180; pts.push([i * 7, v]) } let mn = Math.min(...pts.map(x => x[1])), mx = Math.max(...pts.map(x => x[1])); let d = pts.map((x, i) => `${i ? 'L' : 'M'} ${x[0]} ${28 - (x[1] - mn) / (mx - mn || 1) * 24}`).join(' '); return `<svg viewBox="0 0 91 32" preserveAspectRatio="none"><path d="${d}" fill="none" stroke="${(P[s].price - a[2]) >= 0 ? '#20e6a0' : '#ff5270'}" stroke-width="1.7"/></svg>` }
+    function marketRow(s) { let a = A[s], x = P[s], c = (x.price - a[2]) / a[2] * 100, w = users[user].watch || [], on = w.includes(s), mc = x.price * (s.length * 2100000 + 1800000), vol = mc * (.035 + Math.abs(c) / 100), holders = Math.round(120 + Math.abs(c) * 41 + s.charCodeAt(0) * 3); return `<div class="market-row" onclick="changeChart('${s}')"><button class="watchdot ${on ? 'on' : ''}" onclick="event.stopPropagation();watch('${s}')">${on ? '★' : '☆'}</button><div class="coin-main"><div class="coin-icon">${s.slice(0, 3)}</div><div style="min-width:0"><div class="coin-title">${s}<span>${a[0]}</span></div><div class="coin-meta"><span class="tag">${a[1]}</span><span>${Math.max(1, Math.round(5 + Math.abs(c)))}m</span><span>◉ ${holders.toLocaleString()}</span><span>↗ ${Math.round(3 + Math.abs(c))}%</span></div></div></div><div class="metric"><strong>${fmt(x.price)}</strong><small>USD</small></div><div class="delta ${c >= 0 ? 'up' : 'down'}">${c >= 0 ? '+' : ''}${c.toFixed(2)}%</div><div class="metric"><strong>${moneyShort(mc)}</strong><small>market cap</small></div><div class="metric"><strong>${moneyShort(vol)}</strong><small>24h volume</small></div><div class="coin-main"><div class="spark">${sparkline(s)}</div><div class="metric"><strong>${Math.round(30 + Math.abs(c) * 4)}</strong><small>activity</small></div></div><button class="actionbtn" onclick="event.stopPropagation();openTrade('${s}','buy')">Buy ${s}</button></div>` }
+    function moneyShort(n) { if (n >= 1e12) return '$' + (n / 1e12).toFixed(1) + 'T'; if (n >= 1e9) return '$' + (n / 1e9).toFixed(1) + 'B'; if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M'; if (n >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K'; return '$' + n.toFixed(0) }
+    function row(s, buttons) { let a = A[s], x = P[s], c = (x.price - a[2]) / a[2] * 100, w = users[user].watch || [], on = w.includes(s); return `<div class="asset" onclick="changeChart('${s}')"><div style="display:flex;align-items:center;gap:6px"><button class="watch ${on ? 'on' : ''}" onclick="event.stopPropagation();watch('${s}')">★</button><div class="assetname">${s}<small>${a[0]}</small></div></div><div>${fmt(x.price)}</div><div class="${c >= 0 ? 'up' : 'down'}">${c >= 0 ? '+' : ''}${c.toFixed(2)}%</div><div>${buttons ? `<button class="mini" onclick="event.stopPropagation();openTrade('${s}','buy')">Buy</button> <button class="mini" onclick="event.stopPropagation();openTrade('${s}','sell')">Sell</button>` : ''}</div></div>` }
+    function renderFilters() { let cs = ['All', 'Memecoin', 'Crypto', 'Stocks', 'ETFs', 'Indices', 'Forex', 'Commodities']; $('filters').innerHTML = cs.map(c => `<button class="filter ${filter === c ? 'active' : ''}" onclick="filter='${c}';renderFilters();renderMarkets()">${c}</button>`).join('') + `<span class="market-count">${Object.keys(A).length} markets</span>` }
+    function renderMarkets() { let arr = Object.keys(A).filter(s => (filter === 'All' || A[s][1] === filter) && (!q || s.toLowerCase().includes(q) || A[s][0].toLowerCase().includes(q))); $('markets').innerHTML = arr.map(s => marketRow(s)).join('') || '<div class="empty">No markets found.</div>' } function search(v) { q = v; go('markets', document.querySelectorAll('.navitem')[1]); renderMarkets() }
+    function watch(s) { let w = users[user].watch || []; users[user].watch = w.includes(s) ? w.filter(x => x !== s) : w.concat(s); save(); render() } function renderWatch() { let w = users[user].watch || []; $('watchlist').innerHTML = w.length ? w.map(s => row(s, true)).join('') : '<div class="empty">Your watchlist is empty.</div>' }
+    function openTrade(s, sd) { tradeSym = s; side = sd; $('ttitle').textContent = (sd === 'buy' ? 'Buy ' : 'Sell ') + s; $('tinfo').textContent = A[s][0] + ' • ' + fmt(P[s].price) + ' per unit • order'; $('qty').value = 1; estimate(); $('trade').classList.add('on') } function closeTrade() { $('trade').classList.remove('on') } function estimate() { $('estimate').textContent = fmt((parseFloat($('qty').value) || 0) * P[tradeSym].price) }
+    function confirmTrade() { let u = users[user], s = tradeSym, qy = parseFloat($('qty').value) || 0, tot = qy * P[s].price, h = u.holdings[s] || { qty: 0, avg: 0 }; if (qy <= 0) return toast('Enter a valid quantity.'); if (side === 'buy') { if (tot > u.cash) return toast('Not enough cash.'); let nq = h.qty + qy; h.avg = (h.avg * h.qty + tot) / nq; h.qty = nq; u.cash -= tot } else { if (qy > h.qty) return toast('Not enough units to sell.'); h.qty -= qy; u.cash += tot; if (h.qty <= 0) delete u.holdings[s] } u.holdings[s] = h; u.history.unshift({ time: new Date().toLocaleString(), side, symbol: s, qty: qy, price: P[s].price, total: tot }); addChartMark(s, side, P[s].price); save(); closeTrade(); render(); toast((side === 'buy' ? 'Bought ' : 'Sold ') + qy + ' ' + s + ' with funds.') }
+    function renderPortfolio() { let h = users[user].holdings || {}, keys = Object.keys(h); $('portfolio').innerHTML = keys.length ? keys.map(s => { let x = h[s], v = x.qty * P[s].price, pl = (P[s].price - x.avg) * x.qty; return `<tr><td><b>${s}</b><br><span class="muted">${A[s][0]}</span></td><td>${x.qty.toFixed(5)}</td><td>${fmt(x.avg)}</td><td>${fmt(P[s].price)}</td><td>${fmt(v)}</td><td class="${pl >= 0 ? 'up' : 'down'}">${pl >= 0 ? '+' : ''}${fmt(pl)}</td><td><button class="mini" onclick="openTrade('${s}','buy')">Buy</button> <button class="mini" onclick="openTrade('${s}','sell')">Sell</button></td></tr>` }).join('') : '<tr><td colspan="7" class="empty">No positions yet.</td></tr>' }
+    function renderHistory() { let h = users[user].history || []; $('history').innerHTML = h.length ? h.slice(0, 100).map(x => `<tr><td>${x.time}</td><td class="${x.side === 'buy' ? 'up' : 'down'}">${x.side.toUpperCase()}</td><td><b>${x.symbol}</b></td><td>${x.qty}</td><td>${fmt(x.price)}</td><td>${fmt(x.total)}</td></tr>`).join('') : '<tr><td colspan="6" class="empty">No transactions yet.</td></tr>' } function renderAdmin() { if (user !== 'admin@novatrade.local') { $('admin').innerHTML = '<tr><td colspan="3" class="empty">Admin access only.</td></tr>'; return } $('admin').innerHTML = Object.entries(users).map(([e, u]) => `<tr><td>${e}</td><td>${fmt(u.cash)}</td><td><button class="mini" onclick="addCash('${e}',100)">+ $100</button> <button class="mini" onclick="addCash('${e}',1000)">+ $1,000</button></td></tr>`).join('') } function addCash(e, n) { users[e].cash += n; save(); renderAdmin(); toast('Added ' + fmt(n) + ' funds.') }
+    function changeChart(s) {
+      if (!A[s]) return;
+      cur = s;
+      makeData();
+      header();
+      draw();
+      renderComments();
+    }
+    function period(p, b) {
+      periodName = p;
+      document.querySelectorAll('#periods .filter').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      delete chartSeries[cur];
+      delete chartSeriesPeriod[cur];
+      makeData(); draw();
+    }
+    function makeData() {
+      const cached = chartSeries[cur];
+      if (cached && chartSeriesPeriod[cur] === periodName) { data = cached; return; }
+      let a = A[cur], n = periodName === '1m' ? 48 : periodName === '5m' ? 60 : periodName === '30m' ? 72 : 84;
+      let p = P[cur].price / (1 + (Math.random() - .5) * .06);
+      data = [];
+      const seedBase = Date.now();
+      for (let i = 0; i < n; i++) {
+        let o = p;
+        let spike = Math.random() < (a[1] === 'Memecoin' ? .075 : .028);
+        let direction = Math.random() < .58 ? 1 : -1;
+        let body = (Math.random() - .47) * a[3] * 2;
+        if (spike) body += direction * (.025 + Math.random() * .085);
+        let c = o * (1 + body);
+        let wick = a[3] * (.5 + Math.random() * 1.8);
+        if (spike) wick += .02 + Math.random() * .06;
+        let h = Math.max(o, c) * (1 + Math.random() * wick);
+        let l = Math.min(o, c) * (1 - Math.random() * wick);
+        p = c;
+        data.push({ o, c, h, l, id: `${seedBase}-${i}` });
+      }
+      chartSeries[cur] = data;
+      chartSeriesPeriod[cur] = periodName;
+    }
+    function addPoint() {
+      let a = A[cur], last = data.at(-1) || { c: P[cur].price, id: `${Date.now()}-0` }, o = last.c;
+      let spike = Math.random() < (a[1] === 'Memecoin' ? .09 : .035);
+      let direction = Math.random() < .58 ? 1 : -1;
+      let move = (Math.random() - .47) * a[3] * 2;
+      if (spike) move += direction * (.025 + Math.random() * .095);
+      let c = o * (1 + move);
+      let wick = a[3] * (.3 + Math.random() * 1.4) + (spike ? .025 : 0);
+      data.push({ o, c, h: Math.max(o, c) * (1 + Math.random() * wick), l: Math.min(o, c) * (1 - Math.random() * wick), id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}` });
+      if (data.length > 100) data.shift();
+      chartSeries[cur] = data;
+      header();
+    }
+    function header() { let a = A[cur], c = (P[cur].price - a[2]) / a[2] * 100; $('csym').textContent = cur; $('cprice').innerHTML = fmt(P[cur].price) + ' <small>USD</small>'; $('cchange').textContent = (c >= 0 ? '+' : '') + c.toFixed(2) + '%'; $('cchange').className = c >= 0 ? 'up' : 'down'; if ($('chartBuySym')) $('chartBuySym').textContent = cur; if ($('chartSellSym')) $('chartSellSym').textContent = cur }
+    const sampleProfiles = [
+      ['Alex M.', 'AM'], ['Kai T.', 'KT'], ['Mika R.', 'MR'], ['Jordan P.', 'JP'],
+      ['Sam C.', 'SC'], ['Nico V.', 'NV'], ['Rae L.', 'RL'], ['Drew K.', 'DK'],
+      ['Chris D.', 'CD'], ['Jules A.', 'JA'], ['Noah B.', 'NB'], ['Ty L.', 'TL'],
+      ['Max R.', 'MR'], ['Ari S.', 'AS'], ['Leo P.', 'LP'], ['Mia K.', 'MK']
+    ];
+    const sampleCommentTemplates = [
+      'Watching {s} closely — that candle just moved fast.',
+      '{s} is getting interesting. The recent move is pretty active.',
+      'I like the way {s} is moving on this timeframe.',
+      'That spike on {s} caught my attention.',
+      'Keeping {s} on my watchlist for the next few candles.',
+      '{s} has some serious movement right now.',
+      'The chart on {s} looks much more active than earlier.',
+      'Anyone else watching {s}? The candles are moving.',
+      'Volume looks active on {s} right now.',
+      'This timeframe makes the {s} movement easier to follow.',
+      'Interesting pullback on {s}. Watching the next candles.',
+      'The price action on {s} is moving around a lot.',
+      'I keep seeing {s} pop up on the movers list.',
+      '{s} is one of the more active charts on my screen.',
+      'Watching for another move on {s}.',
+      'The candles on {s} are getting wider.',
+      'That was a quick move for {s}.',
+      'Checking {s} again after that latest candle.',
+      'The short timeframe on {s} is pretty active.',
+      '{s} has been moving back and forth a lot.'
+    ];
+    function renderComments() {
+      const box = $('comments');
+      if (!box || !A[cur]) return;
+      const offset = (cur.split('').reduce((n, ch) => n + ch.charCodeAt(0), 0)) % sampleProfiles.length;
+      const picks = Array.from({ length: 20 }, (_, i) => {
+        const profile = sampleProfiles[(offset + i) % sampleProfiles.length];
+        const tpl = sampleCommentTemplates[(offset + i * 3) % sampleCommentTemplates.length];
+        const mins = i === 0 ? 'just now' : i < 3 ? i + 'm ago' : (i * 2) + 'm ago';
+        return { profile, text: tpl.replaceAll('{s}', cur), time: mins };
+      });
+      box.innerHTML = picks.map(x => `<div class="comment"><div class="comment-avatar">${x.profile[1]}</div><div><div class="comment-name">${x.profile[0]}<span class="comment-time">${x.time}</span></div><div class="comment-text">${x.text}</div></div></div>`).join('');
+    }
+    function draw() {
+      let cv = $('canvas'), r = cv.getBoundingClientRect(), d = devicePixelRatio || 1, w = Math.max(300, r.width), h = Math.max(220, r.height);
+      cv.width = w * d; cv.height = h * d;
+      let c = cv.getContext('2d'); c.setTransform(d, 0, 0, d, 0, 0); c.clearRect(0, 0, w, h);
+      if (!data.length) return;
+
+      const marks = (chartMarks && chartMarks[cur]) || [];
+      let values = data.flatMap(x => [x.l, x.h]);
+      marks.forEach(m => values.push(m.price));
+      let min = Math.min(...values), max = Math.max(...values), pad = (max - min) * .12 || 1;
+      min -= pad; max += pad;
+
+      const fy = v => h - 20 - (v - min) / (max - min) * (h - 40);
+
+      for (let i = 0; i < 5; i++) {
+        let y = 18 + i * (h - 38) / 4;
+        c.strokeStyle = '#ffffff0b'; c.beginPath(); c.moveTo(0, y); c.lineTo(w, y); c.stroke();
+        c.fillStyle = '#555e6d'; c.font = '10px system-ui'; c.fillText(fmt(max - (max - min) * i / 4), 7, y - 4);
+      }
+
+      let gap = w / data.length, cw = Math.max(3, gap * .48);
+      data.forEach((x, i) => {
+        let X = i * gap + gap / 2, hy = fy(x.h), ly = fy(x.l), oy = fy(x.o), cy = fy(x.c), green = x.c >= x.o;
+        c.strokeStyle = green ? '#20e6a0' : '#ff5270'; c.fillStyle = c.strokeStyle;
+        c.beginPath(); c.moveTo(X, hy); c.lineTo(X, ly); c.stroke();
+        c.fillRect(X - cw / 2, Math.min(oy, cy), cw, Math.max(2, Math.abs(cy - oy)));
+      });
+
+      // Trade markers stay attached to the exact candle where the order was placed.
+      if (marks.length) {
+        marks.slice(-10).forEach(m => {
+          let idx = m.candleId ? data.findIndex(k => k.id === m.candleId) : -1;
+          if (idx < 0 && !m.candleId) {
+            idx = data.reduce((best, k, i) => Math.abs(k.c - m.price) < Math.abs(data[best].c - m.price) ? i : best, 0);
+          }
+          if (idx < 0) return;
+          const k = data[idx], x = idx * gap + gap / 2;
+          const y = Math.max(16, fy(k.h) - 14);
+          const buy = m.side === 'buy', color = buy ? '#20e6a0' : '#ff5270';
+          c.fillStyle = color;
+          c.font = '900 12px system-ui';
+          c.textAlign = 'center';
+          c.fillText(buy ? 'B' : 'S', x, y);
+          c.textAlign = 'left';
+          c.strokeStyle = color; c.lineWidth = 1; c.setLineDash([2, 3]);
+          c.beginPath(); c.moveTo(x, y + 3); c.lineTo(x, fy(k.h) - 1); c.stroke(); c.setLineDash([]);
+        });
+      }
+
+    } let marketEvent = { symbol: null, remaining: 0, mult: 1 };
+
+    function pickMarketEvent() {
+      const symbols = Object.keys(A);
+      const s = symbols[Math.floor(Math.random() * symbols.length)];
+      const a = A[s];
+      const roll = Math.random();
+      let mult;
+      if (roll < .10) mult = 1 + (0.035 + Math.random() * 0.085);       // sharp pump
+      else if (roll < .18) mult = 1 - (0.03 + Math.random() * 0.075);  // sharp drop
+      else mult = 1 + (Math.random() - .5) * .035;                  // smaller move
+      marketEvent = { symbol: s, remaining: 3 + Math.floor(Math.random() * 8), mult };
+    }
+
+    function update() {
+      // Most assets drift normally, while occasional assets receive short-lived
+      // volatility bursts so the board feels active instead of moving in lockstep.
+      if (!marketEvent.remaining || Math.random() < .045) pickMarketEvent();
+
+      for (const s in P) {
+        const a = A[s];
+        let move = (Math.random() - .485) * a[3];
+
+        // Small momentum: recent movers can continue for a few ticks.
+        const momentum = ((P[s].price - a[2]) / a[2]);
+        move += Math.max(-.006, Math.min(.006, momentum * .018));
+
+        if (s === marketEvent.symbol) {
+          move += (marketEvent.mult - 1) * (0.55 + Math.random() * .9);
+          if (Math.random() < .22) move += (Math.random() - .5) * a[3] * 2.5;
+        }
+
+        // Rare individual "headline" candle, especially visible on memecoins.
+        const isMeme = a[1] === 'Memecoin';
+        if (Math.random() < (isMeme ? .012 : .004)) {
+          const direction = Math.random() < .58 ? 1 : -1;
+          move += direction * (.02 + Math.random() * .07) * (isMeme ? 1.15 : 1);
+        }
+
+        P[s].price = Math.max(a[2] * .05, P[s].price * (1 + move));
+      }
+
+      if (marketEvent.remaining) marketEvent.remaining--;
+
+      if (user) {
+        $('topcash').textContent = fmt(users[user].cash);
+        // Do not rebuild every table on every price tick. Rebuilding the full DOM
+        // every 1.2 seconds was the main source of mobile/low-end lag.
+        renderDash();
+        if (!update.marketRefresh) update.marketRefresh = 0;
+        update.marketRefresh++;
+        if (update.marketRefresh % 4 === 0) {
+          renderMarkets();
+          renderWatch();
+          renderPortfolio();
+        }
+      }
+      addPoint(); draw();
+
+      let html = ['BTC', 'ETH', 'SOL', 'NVDA', 'TSLA', 'AAPL', 'DOGE', 'SPY', 'GOLD', 'OIL'].map(s => {
+        let c = (P[s].price - P[s].base) / P[s].base * 100;
+        return `<span class="tick"><b>${s}</b> ${fmt(P[s].price)} <i class="${c >= 0 ? 'up' : 'down'}">${c >= 0 ? '+' : ''}${c.toFixed(2)}%</i></span>`;
+      }).join('');
+      $('ticker').innerHTML = html;
+    }
+    setInterval(update, 1200); window.onresize = draw; makeData(); draw(); update();
+  </script>
 </body>
+
 </html>
