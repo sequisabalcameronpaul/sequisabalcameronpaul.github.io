@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>NovaTrade — Trading Terminal</title>
+  <title>NOVA</title>
   <style>
     :root {
       --bg: #05060a;
@@ -745,8 +745,21 @@
     .twocol {
       display: grid;
       grid-template-columns: 1.5fr .85fr;
+      grid-template-areas: "chart movers" "comments movers";
       gap: 13px;
       margin-top: 13px
+    }
+
+    .twocol>.panel:first-child {
+      grid-area: chart
+    }
+
+    .twocol>.movers-panel {
+      grid-area: movers
+    }
+
+    .twocol>.community-panel {
+      grid-area: comments
     }
 
     .ptitle {
@@ -1651,6 +1664,7 @@
 
       .twocol {
         grid-template-columns: minmax(0, 1fr);
+        grid-template-areas: "chart" "movers" "comments";
         gap: 10px
       }
 
@@ -1706,7 +1720,9 @@
       }
 
       .community-panel {
-        padding: 10px 10px 2px
+        padding: 10px 10px 2px;
+        max-height: 260px;
+        overflow-y: auto
       }
 
       .comment {
@@ -1983,14 +1999,14 @@
                   onclick="period('5m',this)">5m</button><button class="filter"
                   onclick="period('30m',this)">30m</button><button class="filter"
                   onclick="period('1h',this)">1h</button></div>
-              <div class="community-panel">
-                <div class="ptitle">Community activity</div>
-                <div id="comments"></div>
-              </div>
             </div>
-            <div class="panel">
+            <div class="panel movers-panel">
               <div class="ptitle">Market movers <span class="live">LIVE</span></div>
               <div id="movers"></div>
+            </div>
+            <div class="panel community-panel">
+              <div class="ptitle">Community activity</div>
+              <div id="comments"></div>
             </div>
           </div>
         </section>
