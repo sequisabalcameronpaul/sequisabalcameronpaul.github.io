@@ -593,6 +593,10 @@
       font-size: 11px
     }
 
+    .profile-wrap {
+      position: relative
+    }
+
     .avatar {
       width: 33px;
       height: 33px;
@@ -601,7 +605,67 @@
       display: grid;
       place-items: center;
       color: #030609;
-      font-weight: 900
+      font-weight: 900;
+      border: 0;
+      cursor: pointer
+    }
+
+    .avatar:hover {
+      filter: brightness(1.08)
+    }
+
+    .profile-menu {
+      position: absolute;
+      right: 0;
+      top: 43px;
+      width: 190px;
+      background: #0c1017;
+      border: 1px solid #252d3a;
+      border-radius: 12px;
+      padding: 9px;
+      box-shadow: 0 18px 45px #000b;
+      display: none;
+      z-index: 60
+    }
+
+    .profile-menu.on {
+      display: block
+    }
+
+    .profile-label {
+      font-size: 8px;
+      color: #667080;
+      letter-spacing: 1px;
+      padding: 4px 7px
+    }
+
+    .profile-email {
+      font-size: 10px;
+      color: #dce1e9;
+      padding: 7px;
+      border-bottom: 1px solid #1b222d;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .profile-signout {
+      width: 100%;
+      margin-top: 7px;
+      padding: 9px 8px;
+      background: #11161e;
+      border: 1px solid #252d39;
+      border-radius: 8px;
+      color: #ff657d;
+      font-size: 10px;
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer
+    }
+
+    .profile-signout:hover {
+      background: #18141a;
+      border-color: #4a2b35
     }
 
     .content {
@@ -1855,7 +1919,14 @@
         </nav>
         <input id="search" class="search" placeholder="Search token or market..." oninput="search(this.value)">
         <div class="topright"><span>Cash <b id="topcash">$100.00</b></span>
-          <div id="avatar" class="avatar">N</div>
+          <div class="profile-wrap"><button id="avatar" class="avatar" type="button" onclick="toggleProfile()"
+              aria-label="Open profile menu">N</button>
+            <div id="profileMenu" class="profile-menu">
+              <div class="profile-label">ACCOUNT</div>
+              <div id="profileEmail" class="profile-email">User</div><button class="profile-signout" type="button"
+                onclick="logout()">Sign out</button>
+            </div>
+          </div>
         </div>
       </header>
       <div class="content">
@@ -2122,7 +2193,7 @@
       save();
     } function toast(x) { let t = $('toast'); t.textContent = x; t.classList.add('show'); clearTimeout(window.tm); window.tm = setTimeout(() => t.classList.remove('show'), 2200) }
     function auth(m) { mode = m; $('authbox').classList.remove('hidden'); renderAuth() } function closeAuth() { $('authbox').classList.add('hidden') } function toggleAuth() { mode = mode === 'signup' ? 'login' : 'signup'; renderAuth() } function renderAuth() { let s = mode === 'signup'; $('atitle').textContent = s ? 'Create your account' : 'Welcome back'; $('asub').textContent = s ? 'Create your NovaTrade account.' : 'Log in to your NovaTrade terminal.'; $('authbtn').textContent = s ? 'Create account' : 'Log in'; $('switchtext').textContent = s ? 'Already have an account?' : 'Need an account?'; $('switchtext').nextElementSibling.textContent = s ? 'Log in' : 'Sign up' }
-    function submitAuth() { let e = $('email').value.trim().toLowerCase(), p = $('pass').value; if (!e || !p) return toast('Enter email and password.'); if (mode === 'signup') { if (users[e]) return toast('Account already exists.'); users[e] = { password: p, cash: 100, holdings: {}, history: [], watch: ['BTC', 'ETH', 'SOL', 'NVDA'], chartMarks: {} }; save(); user = e } else { if (!users[e] || users[e].password !== p) return toast('Incorrect login details.'); user = e } closeAuth(); ensureChartMarks(); $('landing').style.display = 'none'; $('app').classList.add('on'); $('avatar').textContent = e[0].toUpperCase(); $('adminnav').style.display = e === 'admin@novatrade.local' ? 'block' : 'none'; render(); toast(mode === 'signup' ? 'Account created successfully.' : 'Welcome back.') } function logout() { user = null; $('app').classList.remove('on'); $('landing').style.display = 'block' }
+    function submitAuth() { let e = $('email').value.trim().toLowerCase(), p = $('pass').value; if (!e || !p) return toast('Enter email and password.'); if (mode === 'signup') { if (users[e]) return toast('Account already exists.'); users[e] = { password: p, cash: 100, holdings: {}, history: [], watch: ['BTC', 'ETH', 'SOL', 'NVDA'], chartMarks: {} }; save(); user = e } else { if (!users[e] || users[e].password !== p) return toast('Incorrect login details.'); user = e } closeAuth(); ensureChartMarks(); $('landing').style.display = 'none'; $('app').classList.add('on'); $('avatar').textContent = e[0].toUpperCase(); $('adminnav').style.display = e === 'admin@novatrade.local' ? 'block' : 'none'; render(); toast(mode === 'signup' ? 'Account created successfully.' : 'Welcome back.') } function toggleProfile() { const m = $('profileMenu'); if (!m) return; m.classList.toggle('on'); if (m.classList.contains('on') && user) $('profileEmail').textContent = user } function logout() { user = null; $('profileMenu')?.classList.remove('on'); $('app').classList.remove('on'); $('landing').style.display = 'block' } document.addEventListener('click', e => { const w = document.querySelector('.profile-wrap'); if (w && !w.contains(e.target)) $('profileMenu')?.classList.remove('on') })
     function go(p, el) { document.querySelectorAll('.page').forEach(x => x.classList.remove('active')); $('page-' + p).classList.add('active'); document.querySelectorAll('.navitem').forEach(x => x.classList.remove('active')); if (el) el.classList.add('active'); render() }
     function render() { if (!user) return; let u = users[user]; $('topcash').textContent = fmt(u.cash); renderDash(); renderFilters(); renderMarkets(); renderWatch(); renderPortfolio(); renderHistory(); renderAdmin(); changeChart(cur) }
     function renderDash() { let u = users[user], value = u.cash, pl = 0, invest = 0; for (const s in u.holdings) { let h = u.holdings[s]; value += h.qty * P[s].price; pl += (P[s].price - h.avg) * h.qty; invest += h.qty * h.avg } $('acct').textContent = fmt(value); $('cash').textContent = fmt(u.cash); $('pl').textContent = (pl >= 0 ? '+' : '') + fmt(pl); $('pl').className = 'val ' + (pl >= 0 ? 'up' : 'down'); $('plsub').textContent = invest ? ((pl / invest * 100).toFixed(2) + '% on held positions') : 'No positions'; const movers = Object.keys(A).filter(s => ['Crypto', 'Memecoin', 'Stocks'].includes(A[s][1])); $('movers').innerHTML = movers.map(s => moverChartRow(s)).join('') }
